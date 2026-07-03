@@ -26,6 +26,28 @@ Required slots:
 - `front_leg`
 - `back_leg`
 
+## Front And Back Limb Convention
+
+The zombie faces right. The viewer sees the zombie from a side view with slight three-quarter depth.
+
+Use this convention for every character part:
+
+- `front_arm`: the near-side arm, closest to the camera/viewer. It appears on top of the torso and usually has the clearest silhouette.
+- `back_arm`: the far-side arm, farther from the camera/viewer. It sits behind the torso and should be slightly darker, less detailed, or partially hidden.
+- `front_leg`: the near-side leg, closest to the camera/viewer. It appears in front of the torso/hip mass and should be the most readable leg.
+- `back_leg`: the far-side leg, farther from the camera/viewer. It sits behind the front leg and torso/hip mass and should be slightly darker, less detailed, or partially hidden.
+
+Do not interpret `front` as "toward the direction of travel." In this rig, `front` means camera-near. Since the zombie faces right, both arms and both legs still belong to the same right-facing body.
+
+Depth treatment:
+
+- Near-side limbs: full contrast, clearer edges, more visible details.
+- Far-side limbs: 10-20% darker or lower contrast, partly occluded by torso/near limb where appropriate.
+- Do not mirror front and back limbs exactly. They need different silhouettes so the walk cycle reads.
+- Do not draw left-facing limbs for right-facing zombies.
+- Do not draw both legs fused together.
+- Do not draw a whole lower body inside one leg slot.
+
 Optional later slots:
 
 - `mutation_overlay`
@@ -87,6 +109,55 @@ ZombieRig
 ```
 
 Unity animation should move these slot transforms. The art should be drawn so every replacement sprite still fits the same slot.
+
+## Angle Rules
+
+The rig is not isometric and not top-down.
+
+Use this angle:
+
+```text
+Side-scrolling 2.5D game art, right-facing side view with slight three-quarter depth, clear horizontal lane readability, visible top surfaces only subtly.
+```
+
+For modular zombie parts:
+
+- Head and torso can show slight chest/face depth.
+- Arms and legs must still attach as side-view paper-doll parts.
+- Feet must sit naturally on the ground line.
+- Top surfaces should be subtle. If a part looks like it belongs in an isometric tactics game, reject it.
+
+## Limb-Specific Drawing Notes
+
+`front_arm`:
+
+- Pivot at `front_arm_shoulder`.
+- Draw as the near-side attacking arm.
+- It can cross in front of the torso.
+- It should support attack animations clearly.
+
+`back_arm`:
+
+- Pivot at `back_arm_shoulder`.
+- Draw as the far-side support arm.
+- It should sit behind the torso in layer order.
+- Keep it readable, but do not let it compete with the front arm.
+
+`front_leg`:
+
+- Pivot at `front_leg_hip`.
+- Foot should land near `front_foot_ground`.
+- Draw as the near-side stride leg.
+- It can overlap the back leg.
+
+`back_leg`:
+
+- Pivot at `back_leg_hip`.
+- Foot should land near `back_foot_ground`.
+- Draw as the far-side support leg.
+- It should be slightly darker/lower contrast than the front leg.
+
+If an AI generation mixes these up, regenerate or manually correct before accepting the asset.
 
 ## Pivot Rules
 

@@ -85,6 +85,16 @@ Canonical rig:
 - Background: transparent for production parts
 - Slots: `head`, `torso`, `front_arm`, `back_arm`, `front_leg`, `back_leg`
 
+Front/back limb meaning:
+
+- `front_arm` and `front_leg` are the near-side limbs closest to the camera/viewer.
+- `back_arm` and `back_leg` are the far-side limbs farther from the camera/viewer.
+- `front` does not mean forward/travel direction.
+- For right-facing zombies, all parts still face right.
+- Far-side limbs should usually be slightly darker, lower contrast, or partially hidden.
+- Do not generate mirrored-identical front/back limbs.
+- Do not generate a full lower body inside one leg slot.
+
 Layer order:
 
 ```text
@@ -117,6 +127,12 @@ Anchor points:
 ```
 
 Production zombie parts must not include other body slots, baked shadows, floor, background, labels, frames, or text.
+
+Required limb prompt wording:
+
+```text
+Right-facing side-view 2D modular zombie part. Front means the near-side limb closest to the camera, back means the far-side limb partly behind the body. Do not mirror front and back limbs exactly. Do not draw isometric, top-down, or left-facing parts.
+```
 
 ## Asset Save Paths
 

@@ -82,6 +82,8 @@ Production rules:
 - Right-facing side view.
 - Same anchors and ground line.
 - Separate slots: `head`, `torso`, `front_arm`, `back_arm`, `front_leg`, `back_leg`.
+- `front_arm` and `front_leg` mean near-side limbs closest to camera.
+- `back_arm` and `back_leg` mean far-side limbs partly behind the body.
 - No baked shadows.
 - No background.
 - No accidental extra body slots.
