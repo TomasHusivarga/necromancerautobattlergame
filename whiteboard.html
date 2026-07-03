@@ -494,13 +494,24 @@
       background: rgba(118, 181, 197, 0.22);
     }
 
-    .z-legs {
-      left: 68px;
+    .z-front-leg,
+    .z-back-leg {
       top: 194px;
-      width: 72px;
+      width: 36px;
       height: 104px;
       border-radius: 20px 20px 34px 34px;
       background: rgba(225, 193, 110, 0.2);
+    }
+
+    .z-front-leg {
+      left: 94px;
+      transform: rotate(-4deg);
+    }
+
+    .z-back-leg {
+      left: 62px;
+      top: 194px;
+      transform: rotate(7deg);
     }
 
     .part-grid {
@@ -749,17 +760,17 @@
             <span>initial battle scope</span>
           </div>
           <div class="stat">
-            <strong>15</strong>
+            <strong>18</strong>
             <span>first production body parts</span>
           </div>
           <div class="stat">
-            <strong>243</strong>
-            <span>base combinations from 3 parts per slot</span>
+            <strong>729</strong>
+            <span>base combinations from 3 choices across 6 slots</span>
           </div>
         </div>
         <div class="board-card">
           <h3>Core hook</h3>
-          <p>Corpse-engineering: heads, torsos, front arms, back arms, legs, and mutations create zombie roles. The modular rig is the production backbone.</p>
+          <p>Corpse-engineering: heads, torsos, front arms, back arms, front legs, back legs, and mutations create zombie roles. The modular rig is the production backbone.</p>
         </div>
         <div class="board-card">
           <h3>Hard boundary</h3>
@@ -783,7 +794,7 @@
             <img src="assets/images/steps/step-01-choose-corpse-parts.png" alt="Concept mockup of choosing corpse parts in the necromancer lab">
           </div>
           <h3>Choose corpse parts</h3>
-          <p>Pick from owned heads, torsos, arms, legs, and mutations.</p>
+          <p>Pick from owned heads, torsos, arms, separate legs, and mutations.</p>
         </article>
         <article class="flow-step" data-step="2">
           <div class="step-image">
@@ -872,7 +883,7 @@
           </div>
           <ul>
             <li>Lock rig template.</li>
-            <li>Create 15 aligned parts.</li>
+            <li>Create 18 aligned parts.</li>
             <li>Composite QA sheet.</li>
             <li>Effects and hit feedback.</li>
             <li>Polish first playable slice.</li>
@@ -933,7 +944,8 @@
         <div class="zombie-preview" aria-label="Simplified modular zombie preview">
           <div class="zombie">
             <div class="z-back" title="Back arm"></div>
-            <div class="z-legs" title="Legs"></div>
+            <div class="z-back-leg" title="Back leg"></div>
+            <div class="z-front-leg" title="Front leg"></div>
             <div class="z-torso" title="Torso"></div>
             <div class="z-head" title="Head"></div>
             <div class="z-front" title="Front arm"></div>
@@ -1005,8 +1017,14 @@
           <article class="part">
             <img src="assets/images/plague-zombie-legs.png" alt="Plague zombie legs module">
             <span class="slot">Movement</span>
-            <h3>Legs</h3>
-            <p>Speed, stability, charge, knockback resistance, and reach timing.</p>
+            <h3>Front Leg</h3>
+            <p>Forward stride, speed, charge timing, and readable walk motion.</p>
+          </article>
+          <article class="part">
+            <img src="assets/images/plague-zombie-legs.png" alt="Plague zombie back leg module">
+            <span class="slot">Stability</span>
+            <h3>Back Leg</h3>
+            <p>Support stride, stability, knockback resistance, and weight.</p>
           </article>
         </div>
       </div>
@@ -1042,7 +1060,7 @@
         </article>
         <article class="risk good">
           <h3>First rig</h3>
-          <p>512x512 canvas, right-facing side view, body center x=256, ground line y=430, layer order: back arm, legs, torso, head, front arm, effects.</p>
+          <p>512x512 canvas, right-facing side view, body center x=256, ground line y=430, layer order: back arm, back leg, front leg, torso, head, front arm, effects.</p>
         </article>
         <article class="risk">
           <h3>QA rule</h3>
@@ -1075,7 +1093,7 @@
         </div>
         <div class="roadmap-row">
           <div class="roadmap-date">Weeks 9-10</div>
-          <div class="roadmap-work"><strong>Production assets</strong> Lock modular rig, create first 15 parts, QA mixed body combinations.</div>
+          <div class="roadmap-work"><strong>Production assets</strong> Lock modular rig, create first 18 parts, QA mixed body combinations.</div>
         </div>
         <div class="roadmap-row">
           <div class="roadmap-date">Weeks 11-12</div>

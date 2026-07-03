@@ -4,7 +4,7 @@
 
 A 2D necromancer strategy/autobattler where the player runs a corpse-engineering lab, builds custom zombies from modular body parts, then sends those designs into automatic lane battles.
 
-The player does not micro-control units during combat. Zombies march forward, meet enemy waves, attack automatically, die, and generate results. The main player skill is in designing bodies before battle: choosing heads, torsos, arms, legs, mutations, and passive effects that combine into useful combat roles.
+The player does not micro-control units during combat. Zombies march forward, meet enemy waves, attack automatically, die, and generate results. The main player skill is in designing bodies before battle: choosing heads, torsos, arms, individual legs, mutations, and passive effects that combine into useful combat roles.
 
 ## Target Scope
 
@@ -105,7 +105,8 @@ Each design should store:
 - Selected `torso`
 - Selected `front_arm`
 - Selected `back_arm`
-- Selected `legs`
+- Selected `front_leg`
+- Selected `back_leg`
 - Optional `mutation`
 - Name
 - Color tint or small cosmetic marker if easy
@@ -117,7 +118,7 @@ The first version should allow 1 active zombie design. A later version can allow
 
 Example roles:
 
-- Tank: high health torso, shield back arm, slow legs.
+- Tank: high health torso, shield back arm, slow leg pair.
 - Charger: runner legs, claw front arm, fragile torso.
 - Plague carrier: plague head, plague torso, mutation that spreads infection.
 - Hook disruptor: hook front arm, stable legs, control-focused head.
@@ -400,7 +401,8 @@ Required slots for the first rig:
 - `torso`
 - `front_arm`
 - `back_arm`
-- `legs`
+- `front_leg`
+- `back_leg`
 
 Optional later slots:
 
@@ -446,7 +448,8 @@ Legs:
 
 - Movement speed.
 - Stability, charge, knockback resistance.
-- Examples: shambling legs, runner legs, armored legs.
+- Split into `front_leg` and `back_leg` so walk cycles can animate each leg separately.
+- Examples: shambling front leg, runner back leg, armored front leg.
 
 Mutations:
 
@@ -637,14 +640,14 @@ Recommended scope:
 - 1 zombie assembly UI.
 - 1 enemy faction.
 - 3 enemy types.
-- 5 body slots.
+- 6 body slots.
 - 3 choices per slot.
 - 1 optional mutation slot.
 - 3 short battles.
 - Basic rewards after each battle.
 - Save/load for unlocked parts and current zombie designs.
 
-This gives up to 243 base body combinations with only 15 required part assets, before mutations. That is enough to test whether modular assembly is fun.
+This gives up to 729 base body combinations with only 18 required part assets, before mutations. That is enough to test whether modular assembly is fun.
 
 ## UI And UX Requirements
 
@@ -750,7 +753,8 @@ Suggested save fields:
       "torso": "plague_torso_01",
       "frontArm": "plague_front_arm_01",
       "backArm": "plague_back_arm_01",
-      "legs": "plague_legs_01",
+      "frontLeg": "plague_front_leg_01",
+      "backLeg": "plague_back_leg_01",
       "mutation": null
     }
   ]
@@ -799,6 +803,39 @@ If built in a typical 2D engine, the code can be separated into these systems:
 - `BattleReplayData` later, if deterministic replays or multiplayer become important
 
 Keep battle logic independent from UI where possible. The same zombie design data should drive preview, stats, save files, and spawned combat units.
+
+## Unity Rig Direction
+
+The first Unity rig should be one reusable animated prefab. Code swaps sprites into fixed slots; animation clips move the slot transforms.
+
+Recommended hierarchy:
+
+```text
+ZombieRig
+  VisualRoot
+    BackArmSlot
+    BackLegSlot
+    FrontLegSlot
+    TorsoSlot
+    HeadSlot
+    FrontArmSlot
+    MutationOverlaySlot
+  Effects
+  UI
+```
+
+Each slot has a `SpriteRenderer`. The Animator should animate the slot objects, not unique finished zombie sprites.
+
+Important pivot rules:
+
+- Head pivots at neck.
+- Torso pivots around hips or body center.
+- Arms pivot at shoulders.
+- Front leg pivots at front hip.
+- Back leg pivots at back hip.
+- Root stays on the ground center.
+
+Separate front/back legs are worth it because walking can show actual alternating leg motion. A single combined leg sprite would limit walk readability and make every zombie feel like it slides.
 
 ## Balancing Rules
 
@@ -876,7 +913,7 @@ Current proof-of-concept assets:
 - `C:\Users\husiv\Documents\New project\generated-assets\modular-zombie-test\plague-zombie-torso.png`
 - `C:\Users\husiv\Documents\New project\generated-assets\modular-zombie-test\plague-zombie-front-arm.png`
 - `C:\Users\husiv\Documents\New project\generated-assets\modular-zombie-test\plague-zombie-back-arm.png`
-- `C:\Users\husiv\Documents\New project\generated-assets\modular-zombie-test\plague-zombie-legs.png`
+- `C:\Users\husiv\Documents\New project\generated-assets\modular-zombie-test\plague-zombie-legs.png` as old combined-leg proof only
 - `C:\Users\husiv\Documents\New project\generated-assets\pitch\necromancer-lab-lane-battle-pitch.png`
 
 These are useful as visual direction, not final production standards.
@@ -904,12 +941,13 @@ Every body part PNG should be exported on the full `512x512` canvas, positioned 
 Render body parts in this order:
 
 1. `back_arm`
-2. `legs`
-3. `torso`
-4. `head`
-5. `front_arm`
-6. `mutation_overlay`
-7. `effects`
+2. `back_leg`
+3. `front_leg`
+4. `torso`
+5. `head`
+6. `front_arm`
+7. `mutation_overlay`
+8. `effects`
 
 This keeps the rear arm behind the body and the front arm visibly readable.
 
@@ -928,8 +966,10 @@ Base anchors:
   "front_arm_shoulder": { "x": 292, "y": 230 },
   "back_arm_shoulder": { "x": 224, "y": 232 },
   "torso_hips": { "x": 256, "y": 325 },
-  "legs_hips": { "x": 256, "y": 325 },
-  "feet_ground": { "x": 256, "y": 430 }
+  "front_leg_hip": { "x": 276, "y": 326 },
+  "back_leg_hip": { "x": 236, "y": 326 },
+  "front_foot_ground": { "x": 282, "y": 430 },
+  "back_foot_ground": { "x": 230, "y": 430 }
 }
 ```
 
@@ -1003,7 +1043,8 @@ assets/
       torso/
       front_arm/
       back_arm/
-      legs/
+      front_leg/
+      back_leg/
       mutation/
 ```
 
@@ -1020,9 +1061,10 @@ plague_head_01.png
 plague_torso_01.png
 plague_front_arm_01.png
 plague_back_arm_01.png
-plague_legs_01.png
+plague_front_leg_01.png
+plague_back_leg_01.png
 brute_front_arm_01.png
-runner_legs_01.png
+runner_front_leg_01.png
 ```
 
 IDs should match file names without extension.
@@ -1055,19 +1097,22 @@ plague_head_01
 plague_torso_01
 plague_front_arm_01
 plague_back_arm_01
-plague_legs_01
+plague_front_leg_01
+plague_back_leg_01
 
 brute_head_01
 brute_torso_01
 brute_front_arm_01
 brute_back_arm_01
-brute_legs_01
+brute_front_leg_01
+brute_back_leg_01
 
 runner_head_01
 runner_torso_01
 runner_front_arm_01
 runner_back_arm_01
-runner_legs_01
+runner_front_leg_01
+runner_back_leg_01
 ```
 
 ## Minimum Stat Model
@@ -1090,8 +1135,8 @@ Part effects should be additive unless there is a strong reason otherwise.
 Example body calculation:
 
 ```text
-final_health = torso.health + head.health + arms.health + legs.health
-final_move_speed = legs.moveSpeed + mutation.moveSpeedBonus
+final_health = torso.health + head.health + arms.health + front_leg.health + back_leg.health
+final_move_speed = average(front_leg.moveSpeed, back_leg.moveSpeed) + mutation.moveSpeedBonus
 final_attack_damage = front_arm.attackDamage + back_arm.attackDamage
 ```
 
@@ -1104,7 +1149,7 @@ Use a strict prompt like this for production attempts:
 ```text
 Create one modular 2D game sprite body part for a right-facing side-view zombie paper-doll rig.
 
-Slot: [head / torso / front_arm / back_arm / legs]
+Slot: [head / torso / front_arm / back_arm / front_leg / back_leg]
 Theme: [plague / brute / runner]
 
 Canvas: 512x512 transparent PNG.
@@ -1137,7 +1182,7 @@ A part is not production-ready if it only looks good in the original full matche
 
 ## Recommended Implementation Order
 
-1. Build a static zombie assembler that layers five PNG parts.
+1. Build a static zombie assembler that layers six PNG parts.
 2. Add metadata-driven part selection.
 3. Add simple stat aggregation.
 4. Build one lane battle with placeholder rectangles or rough sprites.
@@ -1154,6 +1199,6 @@ The concept is working if:
 - Different bodies perform differently in automatic fights.
 - Combat results make the player want to adjust the design.
 - The asset pipeline can produce new parts without redrawing full zombies.
-- The first 15 parts can be mixed without obvious attachment failures.
+- The first 18 parts can be mixed without obvious attachment failures.
 
 If the modular rig is unreliable, reduce visual ambition before increasing content. The whole project depends on reusable body parts.
