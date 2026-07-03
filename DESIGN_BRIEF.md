@@ -811,6 +811,7 @@ The first Unity rig should be one reusable animated prefab. Code swaps sprites i
 Canonical rig files:
 
 - `ART_RIG_GUIDE.md`
+- `AI_ART_PIPELINE.md`
 - `assets/rigs/zombie_side_v1.json`
 - `assets/rigs/zombie_side_v1_template.svg`
 
