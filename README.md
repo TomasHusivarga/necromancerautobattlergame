@@ -8,6 +8,7 @@ See `DESIGN_BRIEF.md` for the deeper design notes, mechanics, systems, scope bou
 
 Art/rig sync files:
 
+- `AGENTS.md`
 - `ART_RIG_GUIDE.md`
 - `AI_ART_PIPELINE.md`
 - `CAMERA_AND_PERSPECTIVE.md`
