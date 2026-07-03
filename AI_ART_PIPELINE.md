@@ -58,6 +58,13 @@ Avoid:
 
 Use separate generation standards per category.
 
+Perspective standard:
+
+- Use `CAMERA_AND_PERSPECTIVE.md`.
+- The game uses side-scrolling 2.5D, not isometric.
+- Characters should be mostly side view with slight three-quarter depth.
+- Environment assets can show subtle top surfaces, but must still support horizontal lane readability.
+
 ### Modular Zombie Parts
 
 Purpose: runtime-swappable character parts.

@@ -10,5 +10,6 @@ Art/rig sync files:
 
 - `ART_RIG_GUIDE.md`
 - `AI_ART_PIPELINE.md`
+- `CAMERA_AND_PERSPECTIVE.md`
 - `assets/rigs/zombie_side_v1.json`
 - `assets/rigs/zombie_side_v1_template.svg`
