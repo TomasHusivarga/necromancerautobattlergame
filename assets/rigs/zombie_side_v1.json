@@ -1,0 +1,54 @@
+{
+  "id": "zombie_side_v1",
+  "canvas": {
+    "width": 512,
+    "height": 512,
+    "bodyCenterX": 256,
+    "groundY": 430,
+    "background": "transparent"
+  },
+  "view": {
+    "facing": "right",
+    "camera": "side_view_with_slight_three_quarter_depth",
+    "lighting": "top_left_soft_light"
+  },
+  "layerOrder": [
+    "back_arm",
+    "back_leg",
+    "front_leg",
+    "torso",
+    "head",
+    "front_arm",
+    "mutation_overlay",
+    "effects"
+  ],
+  "anchors": {
+    "head_neck": { "x": 256, "y": 170 },
+    "torso_neck": { "x": 256, "y": 178 },
+    "torso_front_shoulder": { "x": 292, "y": 230 },
+    "torso_back_shoulder": { "x": 224, "y": 232 },
+    "front_arm_shoulder": { "x": 292, "y": 230 },
+    "back_arm_shoulder": { "x": 224, "y": 232 },
+    "torso_hips": { "x": 256, "y": 325 },
+    "front_leg_hip": { "x": 276, "y": 326 },
+    "back_leg_hip": { "x": 236, "y": 326 },
+    "front_foot_ground": { "x": 282, "y": 430 },
+    "back_foot_ground": { "x": 230, "y": 430 }
+  },
+  "unitySlots": {
+    "BackArmSlot": "back_arm",
+    "BackLegSlot": "back_leg",
+    "FrontLegSlot": "front_leg",
+    "TorsoSlot": "torso",
+    "HeadSlot": "head",
+    "FrontArmSlot": "front_arm",
+    "MutationOverlaySlot": "mutation_overlay"
+  },
+  "exportRules": {
+    "format": "png",
+    "canvas": "full_512x512_canvas_for_every_part",
+    "pivotRule": "Unity pivots should match the relevant anchor point for trimmed sprites; full-canvas sprites can use identical transform positions first.",
+    "noBakedShadow": true,
+    "noBackground": true
+  }
+}

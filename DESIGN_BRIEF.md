@@ -808,6 +808,12 @@ Keep battle logic independent from UI where possible. The same zombie design dat
 
 The first Unity rig should be one reusable animated prefab. Code swaps sprites into fixed slots; animation clips move the slot transforms.
 
+Canonical rig files:
+
+- `ART_RIG_GUIDE.md`
+- `assets/rigs/zombie_side_v1.json`
+- `assets/rigs/zombie_side_v1_template.svg`
+
 Recommended hierarchy:
 
 ```text

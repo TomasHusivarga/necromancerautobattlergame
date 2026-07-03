@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#11130f"/>
+  <g stroke="#2f3a28" stroke-width="1">
+    <path d="M0 64H512M0 128H512M0 192H512M0 256H512M0 320H512M0 384H512M0 448H512"/>
+    <path d="M64 0V512M128 0V512M192 0V512M256 0V512M320 0V512M384 0V512M448 0V512"/>
+  </g>
+  <line x1="256" y1="0" x2="256" y2="512" stroke="#c6f56d" stroke-width="2" stroke-dasharray="8 8"/>
+  <line x1="0" y1="430" x2="512" y2="430" stroke="#e1c16e" stroke-width="3"/>
+  <g fill="none" stroke="#f2ead7" stroke-width="3" opacity="0.85">
+    <ellipse cx="256" cy="134" rx="38" ry="46"/>
+    <path d="M256 178 C222 198 214 268 236 325 C250 335 272 335 286 325 C306 268 292 198 256 178Z"/>
+    <path d="M224 232 C188 250 178 294 186 340"/>
+    <path d="M292 230 C332 244 346 286 336 338"/>
+    <path d="M236 326 C218 360 214 398 230 430"/>
+    <path d="M276 326 C302 360 306 398 282 430"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="12" fill="#f2ead7">
+    <g fill="#c6f56d">
+      <circle cx="256" cy="170" r="5"/>
+      <circle cx="256" cy="178" r="5"/>
+      <circle cx="292" cy="230" r="5"/>
+      <circle cx="224" cy="232" r="5"/>
+      <circle cx="256" cy="325" r="5"/>
+      <circle cx="276" cy="326" r="5"/>
+      <circle cx="236" cy="326" r="5"/>
+      <circle cx="282" cy="430" r="5"/>
+      <circle cx="230" cy="430" r="5"/>
+    </g>
+    <text x="264" y="166">head_neck 256,170</text>
+    <text x="264" y="190">torso_neck 256,178</text>
+    <text x="300" y="226">front_shoulder 292,230</text>
+    <text x="72" y="228">back_shoulder 224,232</text>
+    <text x="264" y="320">torso_hips 256,325</text>
+    <text x="284" y="342">front_leg_hip 276,326</text>
+    <text x="94" y="342">back_leg_hip 236,326</text>
+    <text x="290" y="424">front_foot 282,430</text>
+    <text x="118" y="424">back_foot 230,430</text>
+    <text x="14" y="24" fill="#e1c16e">zombie_side_v1 - 512x512 - right-facing - ground y=430</text>
+  </g>
+</svg>
