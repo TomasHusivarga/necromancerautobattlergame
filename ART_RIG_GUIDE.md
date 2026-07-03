@@ -4,14 +4,14 @@ This is the drawing standard for all modular zombie parts. Do not start producin
 
 ## Fixed Canvas
 
-- Canvas: `512 x 512 px`
+- Canvas: `1024 x 1024 px`
 - Background: transparent
 - Facing: right
 - Camera: side view with slight three-quarter depth
-- Body center: `x = 256`
-- Ground line: `y = 430`
+- Body center: `x = 512`
+- Ground line: `y = 860`
 - Lighting: soft top-left
-- Export each body part on the full `512 x 512 px` canvas first
+- Export each body part on the full `1024 x 1024 px` canvas first
 
 Full-canvas exports are less efficient, but they remove offset problems while the rig is still being proven.
 
@@ -48,21 +48,21 @@ Draw and preview parts in this order:
 
 ## Anchor Points
 
-Use these coordinates on the `512 x 512 px` canvas:
+Use these coordinates on the `1024 x 1024 px` canvas:
 
 ```json
 {
-  "head_neck": { "x": 256, "y": 170 },
-  "torso_neck": { "x": 256, "y": 178 },
-  "torso_front_shoulder": { "x": 292, "y": 230 },
-  "torso_back_shoulder": { "x": 224, "y": 232 },
-  "front_arm_shoulder": { "x": 292, "y": 230 },
-  "back_arm_shoulder": { "x": 224, "y": 232 },
-  "torso_hips": { "x": 256, "y": 325 },
-  "front_leg_hip": { "x": 276, "y": 326 },
-  "back_leg_hip": { "x": 236, "y": 326 },
-  "front_foot_ground": { "x": 282, "y": 430 },
-  "back_foot_ground": { "x": 230, "y": 430 }
+  "head_neck": { "x": 512, "y": 340 },
+  "torso_neck": { "x": 512, "y": 356 },
+  "torso_front_shoulder": { "x": 584, "y": 460 },
+  "torso_back_shoulder": { "x": 448, "y": 464 },
+  "front_arm_shoulder": { "x": 584, "y": 460 },
+  "back_arm_shoulder": { "x": 448, "y": 464 },
+  "torso_hips": { "x": 512, "y": 650 },
+  "front_leg_hip": { "x": 552, "y": 652 },
+  "back_leg_hip": { "x": 472, "y": 652 },
+  "front_foot_ground": { "x": 564, "y": 860 },
+  "back_foot_ground": { "x": 460, "y": 860 }
 }
 ```
 
@@ -107,7 +107,7 @@ Do not trim production sprites until the full-canvas version works.
 
 Before accepting a part:
 
-- It uses the `512 x 512 px` template.
+- It uses the `1024 x 1024 px` template.
 - It faces right.
 - It has no background.
 - It has no baked shadow.

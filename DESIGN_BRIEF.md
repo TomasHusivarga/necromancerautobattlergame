@@ -930,17 +930,17 @@ These are useful as visual direction, not final production standards.
 
 Use one fixed canvas size for every assembled zombie and every individual part export.
 
-Recommended first rig:
+Recommended art master rig:
 
-- Canvas: `512x512`
+- Canvas: `1024x1024`
 - Facing: right-facing side/profile or three-quarter side view
-- Ground line: `y=430`
-- Body center line: `x=256`
+- Ground line: `y=860`
+- Body center line: `x=512`
 - Transparent background
 - No shadow baked into body parts
 - No weapon or effect extending outside the canvas
 
-Every body part PNG should be exported on the full `512x512` canvas, positioned exactly where it belongs on the assembled zombie. This is less storage-efficient, but much safer for a solo project because parts can be layered without per-file manual offsets.
+Every body part PNG should be exported on the full `1024x1024` canvas, positioned exactly where it belongs on the assembled zombie. This is less storage-efficient, but much safer for a solo project because parts can be layered without per-file manual offsets.
 
 ### Layer Order
 
@@ -965,17 +965,17 @@ Base anchors:
 
 ```json
 {
-  "head_neck": { "x": 256, "y": 170 },
-  "torso_neck": { "x": 256, "y": 178 },
-  "torso_front_shoulder": { "x": 292, "y": 230 },
-  "torso_back_shoulder": { "x": 224, "y": 232 },
-  "front_arm_shoulder": { "x": 292, "y": 230 },
-  "back_arm_shoulder": { "x": 224, "y": 232 },
-  "torso_hips": { "x": 256, "y": 325 },
-  "front_leg_hip": { "x": 276, "y": 326 },
-  "back_leg_hip": { "x": 236, "y": 326 },
-  "front_foot_ground": { "x": 282, "y": 430 },
-  "back_foot_ground": { "x": 230, "y": 430 }
+  "head_neck": { "x": 512, "y": 340 },
+  "torso_neck": { "x": 512, "y": 356 },
+  "torso_front_shoulder": { "x": 584, "y": 460 },
+  "torso_back_shoulder": { "x": 448, "y": 464 },
+  "front_arm_shoulder": { "x": 584, "y": 460 },
+  "back_arm_shoulder": { "x": 448, "y": 464 },
+  "torso_hips": { "x": 512, "y": 650 },
+  "front_leg_hip": { "x": 552, "y": 652 },
+  "back_leg_hip": { "x": 472, "y": 652 },
+  "front_foot_ground": { "x": 564, "y": 860 },
+  "back_foot_ground": { "x": 460, "y": 860 }
 }
 ```
 
@@ -995,7 +995,7 @@ Example:
   "image": "zombie_parts/head/plague_head_01.png",
   "rig": "zombie_side_v1",
   "anchors": {
-    "head_neck": { "x": 256, "y": 170 }
+    "head_neck": { "x": 512, "y": 340 }
   },
   "stats": {
     "control": 1,
@@ -1011,7 +1011,7 @@ AI generation can be used for concepting and first-pass parts, but production as
 
 Every generated part must follow this guide:
 
-- Same `512x512` transparent canvas.
+- Same `1024x1024` transparent canvas.
 - Same camera angle.
 - Same scale.
 - Same lighting direction.
@@ -1158,11 +1158,11 @@ Create one modular 2D game sprite body part for a right-facing side-view zombie 
 Slot: [head / torso / front_arm / back_arm / front_leg / back_leg]
 Theme: [plague / brute / runner]
 
-Canvas: 512x512 transparent PNG.
+Canvas: 1024x1024 transparent PNG.
 Camera: consistent right-facing side view, slight three-quarter depth only.
 Style: dark fantasy hand-painted 2D game sprite, readable silhouette, detailed but clean.
 Lighting: top-left soft light.
-Scale: must match a humanoid zombie whose feet stand on y=430 and body center is x=256.
+Scale: must match a humanoid zombie whose feet stand on y=860 and body center is x=512.
 Attachment points must match the zombie_side_v1 rig.
 
 Do not include background, floor, shadow, labels, text, frame, full body, extra limbs, extra heads, weapons unless they are part of this slot, or cropped edges.
