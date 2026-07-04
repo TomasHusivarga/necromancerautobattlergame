@@ -16,6 +16,22 @@ Use this order:
 
 The goal is consistency. A beautiful asset that does not match the game is not production-ready.
 
+## Screen Concept Rule
+
+Screen concepts must be simpler than final game screenshots. Their job is to lock layout, camera, visual hierarchy, and production direction.
+
+Reject screen concepts that look like dense finished illustrations.
+
+Limits for first-pass concepts:
+
+- Lab builder: one large zombie preview, one inventory panel, one stats/details panel, one bottom action/resource strip.
+- Battle: one readable battlefield area, 3-5 squad groups per side, 2-3 spell effects, one bottom spell bar.
+- UI: large simple panels, readable spacing, no fake text blocks, no ornate border on every container.
+- Terrain: broad value patches, low texture density, clear unit silhouettes.
+- Icons: fewer larger icons for explanation; final icon grids come later.
+
+Prompt screen concepts as `clean production readability mockups`, not splash art, key art, or finished illustration.
+
 ## Master Style Reference
 
 The project needs one master artwork that defines the whole visual language.
@@ -23,8 +39,8 @@ The project needs one master artwork that defines the whole visual language.
 It should show:
 
 - Necromancer lab atmosphere.
-- One modular zombie.
-- Lane battlefield direction.
+- One modular zombie in the lab/builder view.
+- Old-RTS high-angle battlefield direction.
 - Village/guard enemy side.
 - Terrain treatment.
 - Rocks, trees, props, and structures.
@@ -48,6 +64,7 @@ Avoid:
 
 - Photorealism.
 - Overly detailed noise.
+- Dense screen concepts that would be hard to reproduce consistently.
 - Random horror gore.
 - Comic/cartoon exaggeration.
 - Pure monochrome green palette.
@@ -61,19 +78,20 @@ Use separate generation standards per category.
 Perspective standard:
 
 - Use `CAMERA_AND_PERSPECTIVE.md`.
-- The game uses side-scrolling 2.5D, not isometric.
-- Characters should be mostly side view with slight three-quarter depth.
-- Environment assets can show subtle top surfaces, but must still support horizontal lane readability.
+- The lab/zombie builder uses side-view modular character art.
+- Actual battles use old-RTS high-angle orthographic art.
+- Do not mix these cameras inside one production asset.
 
 ### Modular Zombie Parts
 
-Purpose: runtime-swappable character parts.
+Purpose: runtime-swappable character parts for the lab, corpse-builder screen, large unit preview, and inspection UI.
 
 Canonical rig:
 
 - `assets/rigs/zombie_side_v1.json`
 - `assets/rigs/zombie_side_v1_template.svg`
 - `ART_RIG_GUIDE.md`
+- `assets/characters/zombies/MODULAR_ZOMBIE_PROMPT_SPEC.md`
 
 Production rules:
 
@@ -87,6 +105,16 @@ Production rules:
 - No baked shadows.
 - No background.
 - No accidental extra body slots.
+- These are not the final small battlefield sprites.
+
+Prompt workflow:
+
+- Use `assets/characters/zombies/MODULAR_ZOMBIE_PROMPT_SPEC.md`.
+- Generate one slot at a time.
+- Treat first results as rig tests, not production art.
+- Record prompt version, failure reason, and acceptance level.
+- Do not scale to more zombie families until one set assembles cleanly on the Unity rig.
+- After the lab rig works, create separate RTS-scale battle sprites that represent each zombie design/family at gameplay zoom.
 
 Photoshop cleanup:
 
@@ -98,7 +126,7 @@ Photoshop cleanup:
 
 ### Enemies
 
-Purpose: opposing readable units in lane battles.
+Purpose: opposing readable units in RTS-style automatic battles.
 
 Recommended first enemy asset types:
 
@@ -109,11 +137,11 @@ Recommended first enemy asset types:
 
 Rules:
 
-- Same side-view gameplay camera as zombies.
+- Old-RTS high-angle orthographic battle camera.
 - Enemy silhouettes must differ clearly from zombies.
 - Human enemies can be full sprites at first; modular enemies are not required for MVP.
 - Use warmer torch/iron/cloth colors to contrast necromancer green.
-- Keep weapons readable at battle scale.
+- Keep weapons readable at small squad scale.
 
 ### Environment Tiles And Terrain
 
@@ -133,7 +161,8 @@ Rules:
 - Avoid high-detail noise that fights with units.
 - Terrain should be darker and lower contrast than characters.
 - Create repeatable/tileable variants where needed.
-- Keep lane readability first.
+- Battle terrain uses the old-RTS high-angle ground plane.
+- Lab floor can use the side-view/lab interface camera when used only inside the builder.
 
 ### Props
 
@@ -173,7 +202,8 @@ Rules:
 
 - Use muted colors and strong silhouettes.
 - Avoid photoreal texture.
-- Generate as isometric/side-view compatible depending on scene use.
+- Generate battle rocks/trees as old-RTS high-angle cutouts.
+- Generate lab props separately if they are used only in the side-view builder.
 - Use transparent cutouts for foreground objects.
 - Keep variations within one shape language.
 
@@ -200,7 +230,8 @@ Examples:
 Rules:
 
 - Larger assets can be `2048 x 1024` or `2048 x 2048`.
-- Must match side-view lane perspective.
+- Battle structures must match the old-RTS high-angle perspective with visible roof/top surfaces.
+- Lab-only structures/props may use side-view presentation.
 - Do not overdetail backgrounds.
 - Important structures need readable silhouette at gameplay zoom.
 
@@ -262,12 +293,12 @@ Example structure:
 
 ```text
 Create a [category] asset for a 2D dark fantasy necromancer autobattler.
-Match the master style reference: hand-painted, readable, dark olive/bone/iron palette, green necromantic accents, side-view gameplay readability.
+Match the master style reference: graphic hand-drawn gothic, readable, dark olive/bone/iron palette, green necromantic accents.
 Asset: [specific asset]
 Use: [battle unit / lab prop / UI card / structure]
 Canvas: [size]
 Background: transparent / simple dark preview background
-Camera: [right-facing side view / front UI icon / side-view structure]
+Camera: [lab side-view modular preview / old-RTS high-angle battle sprite / front UI icon]
 Constraints: no text, no logo, no photorealism, no random extra objects, no excessive gore.
 ```
 
@@ -321,12 +352,12 @@ assets/
 
 1. Generate master style reference.
 2. Approve or regenerate until the whole game direction feels right.
-3. Generate zombie family reference sheet.
-4. Generate environment reference sheet.
-5. Generate UI reference sheet.
+3. Generate one lab modular zombie reference sheet.
+4. Generate one old-RTS battle camera reference sheet.
+5. Generate environment and UI reference sheets using the correct camera per category.
 6. Create first actual production assets.
 7. Import into Unity.
-8. Test at gameplay scale.
+8. Test lab preview scale and battle gameplay scale separately.
 9. Photoshop cleanup only if the asset is close.
 10. Save accepted asset and prompt notes.
 

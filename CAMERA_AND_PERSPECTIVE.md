@@ -1,155 +1,150 @@
 # Camera And Perspective Standard
 
-The game should use a side-scrolling 2.5D presentation, not isometric.
+The project now uses two different camera standards because the lab and the battlefield have different jobs.
 
 ## Decision
 
-Use a fixed side-view lane camera with slight vertical visibility for ground and props.
+Use side-view art for the zombie builder, and old-RTS high-angle art for battles.
 
-Recommended game camera:
+```text
+Lab / zombie builder: side-view 2D paper-doll preview
+Battlefield: high-angle orthographic RTS camera
+Unity camera: orthographic
+Battle inspiration: Warlords Battlecry, Stronghold Crusader, Age of Empires style readability
+Battle purpose: many small squads visible at once
+```
+
+This means earlier side-view zombie rig work is still useful for the lab and unit inspection screen. It should not define the actual battle camera.
+
+## Lab Camera
+
+Use this for:
+
+- corpse-building screen
+- modular zombie preview
+- body-part inventory
+- part cards when showing large character art
+- close-up unit inspection
+
+Lab art standard:
+
+```text
+Right-facing side-view 2D modular zombie art, slight three-quarter depth, strong silhouette, full-canvas paper-doll parts, no visible sockets, limbs overlap and cover joints.
+```
+
+The lab can show large, attractive modular zombies because the player needs to understand the body design.
+
+## Battle Camera
+
+Use this for:
+
+- actual automatic battles
+- units and squads on the battlefield
+- battle terrain
+- battle props
+- battle structures
+- projectiles and VFX
+
+Battle art standard:
+
+```text
+Old-RTS high-angle orthographic 2D/2.5D battlefield art, camera looking down at units and terrain from above, readable squad-scale sprites, visible ground plane, visible tops of buildings and shoulders/heads, not side-scrolling, not fighting-game profile.
+```
+
+Recommended battle camera language:
 
 ```text
 Camera type: Orthographic
-Gameplay view: side-scrolling 2.5D lane
-Camera yaw: 0 degrees
-Camera pitch: 0 degrees for pure 2D camera, with artwork faking slight top visibility
-Art perspective: side view with slight three-quarter depth
-Visible ground/top surfaces: about 10-20%
-Unit facing: right for player zombies, mirrored left for enemies
-Lane direction: left to right
-Near-side limbs: called front_arm/front_leg
-Far-side limbs: called back_arm/back_leg
+Gameplay view: old-RTS high-angle battlefield
+Camera yaw: fixed diagonal or near-diagonal map view
+Camera pitch/art angle: high angled view, roughly 45-60 degrees from the ground plane
+Unit scale: small squad-scale sprites, readable in groups
+Battle readability: many units, projectiles, terrain, structures, and UI visible at once
 ```
 
-This means the Unity camera can stay simple and orthographic. The 2.5D look comes from layered background, ground strips, prop placement, parallax, shadows, and artwork showing a small amount of top surface.
+Do not use side-scrolling character prompts for battlefield units.
 
-## Why Not Isometric
+## Why Two Cameras
 
-Isometric is good for tactical maps and free movement, but this game is about automatic horizontal lane fights. Isometric would make modular zombie parts harder because every limb would need more perspective consistency, and combat readability would become harder at small size.
+The main hook is corpse-engineering, so the lab needs readable body parts and satisfying character construction. The battle needs to show many units and squads, so old-RTS perspective is a better fit than large side-view sprites.
 
-For this project, side-view 2.5D gives:
+This split reduces production risk:
 
-- Clear left-to-right combat.
-- Easier modular body rigging.
-- Easier walk and attack animation.
-- Stronger unit silhouettes.
-- Easier UI/battle readability.
-- Less asset production risk.
+- Lab art can be detailed and modular.
+- Battle art can be simpler, smaller, and more readable.
+- The same zombie design data can drive both the large lab preview and the simplified battle representation.
+- The battle can support multiple squads without oversized sprites filling the screen.
 
-## Art Angle
+## Unit Representation
 
-Use this art rule:
+The player builds zombies from modular parts in the lab. In battle, each built zombie design should be represented by a simplified RTS-scale unit sprite or small sprite set.
+
+Recommended first implementation:
 
 ```text
-Characters: mostly side view, slight three-quarter depth
-Ground: visible top plane, shallow angle
-Props: side-view readable, slight visible top when useful
-Structures: side-facing facade with small visible roof/top plane
-UI icons: front/three-quarter view as needed for clarity
+Lab: modular side-view paper-doll zombie
+Battle: small high-angle RTS unit sprite derived from the design's role/family
 ```
 
-Do not draw zombies as full isometric units. They should read like side-view combat units.
+Do not require every modular body part to be individually visible in the battlefield sprite for MVP. The battle sprite only needs to communicate the unit role, family, and major mutation.
 
-## Character Limb Depth
+## Prompt Wording
 
-For characters, `front` and `back` describe camera depth, not travel direction.
+For lab modular zombie parts:
 
 ```text
-front_arm/front_leg = near-side limb, closer to camera/viewer
-back_arm/back_leg = far-side limb, farther from camera/viewer
+Right-facing side-view 2D modular zombie paper-doll part for a corpse-building screen, slight three-quarter depth, full-canvas sprite, no visible sockets, limbs overlap and cover joints, not RTS battle scale.
 ```
 
-The near-side limb should usually have stronger contrast and clearer shape. The far-side limb should sit behind the body and can be slightly darker, less detailed, or partially occluded.
-
-This matters for AI prompts. Do not ask for generic "left arm" or "right leg" unless the body-side meaning is explicitly needed. Prefer `near-side/front_arm`, `far-side/back_arm`, `near-side/front_leg`, and `far-side/back_leg`.
-
-## Practical Visual Ratio
-
-For gameplay art:
+For battle units:
 
 ```text
-Front/side silhouette importance: 80-90%
-Top-surface visibility: 10-20%
+Old-RTS high-angle orthographic unit sprite for a dark fantasy autobattler, viewed from above at a fixed battlefield angle, small squad-scale readability, visible head/shoulders/back and ground contact, clear silhouette at tiny size, not side-scrolling, not front-facing portrait, not fighting-game profile.
 ```
 
-This gives enough depth for a 2.5D look without making modular alignment painful.
-
-## Unity Setup
-
-Recommended first Unity setup:
+For battle terrain:
 
 ```text
-Camera Projection: Orthographic
-Camera Rotation: 0, 0, 0
-Sorting: SpriteRenderer sorting layers / order in layer
-Depth: created through sorting layers, parallax backgrounds, shadows, and scale
+Old-RTS high-angle orthographic terrain tile or ground patch, visible top plane, muted contrast behind units, readable dirt/stone/graveyard material, tileable or blendable, not side-scrolling background.
 ```
 
-Possible sorting layers:
+For battle structures:
 
 ```text
-BackgroundFar
-BackgroundNear
-Ground
-UnitsBack
-Units
-UnitsFront
-VFX
-UI
+Old-RTS high-angle orthographic structure, visible roof/top surfaces and front/side faces, readable silhouette at gameplay zoom, dark fantasy material language, not side-view facade.
 ```
 
-Keep the camera fixed during combat for MVP. Add small smooth camera movement only after battles are readable.
-
-## Asset Prompt Wording
-
-Use this wording in AI prompts:
+For lab props/UI:
 
 ```text
-Side-scrolling 2.5D game art, right-facing side view with slight three-quarter depth, clear horizontal lane readability, visible top surfaces only subtly, not isometric, not top-down, not photorealistic.
+Dark fantasy gothic 2D game art, readable shapes, usable in a lab interface, enough plain space for real UI text where needed.
 ```
-
-For characters:
-
-```text
-Right-facing side-view 2D game sprite with slight three-quarter depth, strong silhouette, feet aligned to the ground line, modular paper-doll proportions, not isometric.
-```
-
-For modular zombie limbs:
-
-```text
-Right-facing side-view 2D modular zombie part. Front means the near-side limb closest to the camera, back means the far-side limb partly behind the body. Do not mirror front and back limbs exactly. Do not draw isometric, top-down, or left-facing parts.
-```
-
-For structures:
-
-```text
-Side-view 2.5D structure for a horizontal lane battle, facade facing camera with a small visible roof/top plane, readable silhouette, not isometric.
-```
-
-For terrain:
-
-```text
-Horizontal side-scrolling lane ground strip with slight visible top plane, dark fantasy painterly style, low contrast behind units, not top-down and not isometric.
-```
-
-## What To Test First
-
-Before generating many assets, test three perspective samples:
-
-1. One zombie on the rig template.
-2. One enemy militia sprite.
-3. One lane background strip with rocks/tree/structure.
-
-Put them together in Unity at gameplay zoom. If they feel like the same world and the zombie reads clearly, lock the angle.
 
 ## Rejection Rules
 
-Reject generated assets if:
+Reject lab modular parts if:
 
-- They look isometric.
-- They look top-down.
-- They face the wrong direction.
-- The feet do not sit on the ground line.
-- The top surface is too visible.
-- The sprite loses silhouette clarity.
-- The asset would require repainting to match the lane camera.
+- They look like tiny RTS units instead of builder-preview parts.
+- They do not fit the side-view paper-doll rig.
+- They expose shoulder sockets or mechanical limb slots.
+- They include extra body slots.
+
+Reject battle assets if:
+
+- They look like side-scrolling lane sprites.
+- They are too large or detailed for many units on screen.
+- They use front-facing portrait perspective.
+- They do not match the old-RTS high-angle camera.
+- Buildings do not show believable top surfaces.
+- Unit silhouettes collapse at squad scale.
+
+## First Perspective Tests
+
+Before production, create and compare:
+
+1. One side-view lab zombie preview using the modular rig.
+2. One high-angle RTS plague zombie battle sprite.
+3. One high-angle RTS militia/enemy battle sprite.
+4. One high-angle terrain patch with a small structure/prop.
+
+Only lock production prompts after these four samples feel like the same game.

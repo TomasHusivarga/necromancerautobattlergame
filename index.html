@@ -747,7 +747,7 @@
       <div class="hero-main">
         <p class="kicker">Solo-dev 2D strategy/autobattler concept</p>
         <h2 id="hero-title">Build the monster, then watch the battlefield prove it.</h2>
-        <p class="summary">The player runs a necromancer lab, stitches zombies from modular corpse parts, and sends those designs into automatic lane battles. The game is about engineering bodies, learning from fights, and improving designs between runs.</p>
+        <p class="summary">The player runs a necromancer lab, stitches zombies from modular corpse parts, and sends those designs into automatic RTS-style squad battles. The game is about engineering bodies, learning from fights, and improving designs between runs.</p>
       </div>
       <aside class="hero-side" aria-label="Project constraints">
         <div class="stat-grid">
@@ -756,8 +756,8 @@
             <span>target for first vertical slice</span>
           </div>
           <div class="stat">
-            <strong>1 lane</strong>
-            <span>initial battle scope</span>
+            <strong>RTS</strong>
+            <span>high-angle automatic squad battles</span>
           </div>
           <div class="stat">
             <strong>18</strong>
@@ -770,15 +770,15 @@
         </div>
         <div class="board-card">
           <h3>Core hook</h3>
-          <p>Corpse-engineering: heads, torsos, front arms, back arms, front legs, back legs, and mutations create zombie roles. The modular rig is the production backbone.</p>
+          <p>Corpse-engineering: heads, torsos, front arms, back arms, front legs, back legs, and mutations create stats, tags, abilities, and hybrid roles.</p>
         </div>
         <div class="board-card">
           <h3>Hard boundary</h3>
           <p>No multiplayer, campaign sprawl, heavy crafting, or unique full-body sprites until the solo loop proves it is fun.</p>
         </div>
         <figure class="image-card">
-          <img src="assets/images/necromancer-lab-lane-battle-pitch.png" alt="Concept image showing the necromancer lab and automatic lane battle idea">
-          <figcaption class="image-caption">Visual pitch: lab planning feeds into automatic lane battle.</figcaption>
+          <img src="assets/art-style/references/approved_graphic_big_shape_style_reference.png" alt="Approved graphic gothic art style reference">
+          <figcaption class="image-caption">Approved style target: bold black outlines, flat shadow blocks, limited texture, and readable silhouettes.</figcaption>
         </figure>
       </aside>
     </section>
@@ -805,10 +805,10 @@
         </article>
         <article class="flow-step" data-step="3">
           <div class="step-image">
-            <img src="assets/images/steps/step-03-lane-battle.png" alt="Concept mockup of automatic lane battle">
+            <img src="assets/art-style/screen_concepts/battle_screen_rts_spells_concept_04_pc_style_ref.png" alt="Current RTS-style autobattle screen reference">
           </div>
-          <h3>Start lane battle</h3>
-          <p>Zombies spawn, march forward, and fight automatically.</p>
+          <h3>Start squad battle</h3>
+          <p>Simplified RTS-scale squads move, cast, block, and fight automatically.</p>
         </article>
         <article class="flow-step" data-step="4">
           <div class="step-image">
@@ -843,7 +843,7 @@
             <li>Static lab screen.</li>
             <li>Simple zombie assembler.</li>
             <li>Placeholder body parts.</li>
-            <li>One lane with rectangle units.</li>
+            <li>High-angle battle prototype with placeholder squads.</li>
             <li>Win/loss and restart.</li>
           </ul>
         </article>
@@ -912,7 +912,7 @@
         </article>
         <article class="module">
           <h3>Battle</h3>
-          <p>Automatic lane simulation with movement, targeting, attacks, statuses, and results.</p>
+          <p>Automatic RTS-style squad battle with movement, targeting, attacks, statuses, spells, and results.</p>
         </article>
         <article class="module">
           <h3>Progression</h3>
@@ -928,7 +928,7 @@
     <section class="section" id="lab">
       <div class="section-title">
         <h2>Lab Whiteboard</h2>
-        <p>The lab should feel like a useful workshop, not a huge base-builder.</p>
+        <p>The lab should feel like a useful workshop: side-view zombie construction, inventory, stats, and a clear start battle action.</p>
       </div>
       <div class="lab-layout">
         <aside class="note">
@@ -964,12 +964,12 @@
       </div>
       <div class="visual-guide">
         <figure class="image-card contain">
-          <img src="assets/images/plague-zombie-transparent.png" alt="Full assembled plague zombie concept sprite">
-          <figcaption class="image-caption">Target feeling: a readable stitched unit that has a clear role before battle.</figcaption>
+          <img src="assets/art-style/screen_concepts/lab_builder_inventory_concept_04_pc_style_ref.png" alt="Current lab builder screen reference">
+          <figcaption class="image-caption">Current lab reference: PC 16:9 builder with inventory, construction board, stat panel, and action bar.</figcaption>
         </figure>
         <figure class="image-card contain">
-          <img src="assets/images/modular-plague-zombie-sheet-transparent.png" alt="Separated zombie body parts on transparent sheet">
-          <figcaption class="image-caption">Production direction: separated parts that can be recombined through the assembler.</figcaption>
+          <img src="assets/art-style/references/approved_graphic_big_shape_style_reference.png" alt="Approved graphic gothic style reference">
+          <figcaption class="image-caption">Use this style reference for future prompts: graphic shapes, hard shadows, low texture, readable silhouettes.</figcaption>
         </figure>
       </div>
     </section>
@@ -977,12 +977,12 @@
     <section class="section" id="battle">
       <div class="section-title">
         <h2>Battle Whiteboard</h2>
-        <p>One horizontal lane first. No pathfinding complexity until the core combat is fun.</p>
+        <p>High-angle RTS-style automatic combat. Keep squads readable and avoid complex pathfinding until the core combat is fun.</p>
       </div>
       <div class="battle-board">
         <div class="lane">
-          <h3>Automatic lane fight</h3>
-          <p>Zombies spawn left, enemies spawn right, units march forward and fight when in range.</p>
+          <h3>Automatic squad fight</h3>
+          <p>Zombies and enemies spawn as readable groups, move toward objectives, cast abilities, and fight when in range.</p>
           <div class="lane-track"></div>
           <div class="unit z1">Z</div>
           <div class="unit z2">Z</div>
@@ -992,39 +992,39 @@
         <div class="part-grid">
           <article class="part">
             <img src="assets/images/plague-zombie-head.png" alt="Plague zombie head module">
-            <span class="slot">Targeting</span>
+            <span class="slot">Head</span>
             <h3>Head</h3>
-            <p>Controls behavior: weakest target, armored target, infected target, ranged priority.</p>
+            <p>Targeting, intelligence, focus, behavior modifiers, and visual identity.</p>
           </article>
           <article class="part">
             <img src="assets/images/plague-zombie-torso.png" alt="Plague zombie torso module">
-            <span class="slot">Survival</span>
+            <span class="slot">Torso</span>
             <h3>Torso</h3>
-            <p>Health, armor, resistance, body mass, and core archetype.</p>
+            <p>Vitality, armor, archetype mass, scaling, and battle body silhouette.</p>
           </article>
           <article class="part">
             <img src="assets/images/plague-zombie-front-arm.png" alt="Plague zombie front arm module">
-            <span class="slot">Primary Attack</span>
+            <span class="slot">Front Arm</span>
             <h3>Front Arm</h3>
-            <p>Main damage, attack range, cleave, hook, claw, or armor break.</p>
+            <p>Main active ability: claw, bow, staff, heal, spell, or heavy attack.</p>
           </article>
           <article class="part">
             <img src="assets/images/plague-zombie-back-arm.png" alt="Plague zombie back arm module">
-            <span class="slot">Utility</span>
+            <span class="slot">Back Arm</span>
             <h3>Back Arm</h3>
-            <p>Shield, secondary hit, spit, grab, buff, or corpse harvest.</p>
+            <p>Offhand shield, relic, support tool, secondary attack, or passive boost.</p>
           </article>
           <article class="part">
             <img src="assets/images/plague-zombie-legs.png" alt="Plague zombie legs module">
-            <span class="slot">Movement</span>
+            <span class="slot">Front Leg</span>
             <h3>Front Leg</h3>
-            <p>Forward stride, speed, charge timing, and readable walk motion.</p>
+            <p>Speed, dexterity, engage timing, and front movement silhouette.</p>
           </article>
           <article class="part">
             <img src="assets/images/plague-zombie-legs.png" alt="Plague zombie back leg module">
-            <span class="slot">Stability</span>
+            <span class="slot">Back Leg</span>
             <h3>Back Leg</h3>
-            <p>Support stride, stability, knockback resistance, and weight.</p>
+            <p>Speed, stability, knockback resistance, and movement support.</p>
           </article>
         </div>
       </div>
@@ -1038,33 +1038,33 @@
       <div class="asset-showcase">
         <figure class="image-card contain">
           <div class="asset-image">
-            <img src="assets/images/plague-zombie-transparent.png" alt="Full zombie concept used as visual direction">
+            <img src="assets/art-style/screen_concepts/lab_builder_inventory_concept_04_pc_style_ref.png" alt="Lab builder screen reference">
           </div>
-          <figcaption class="image-caption">Full-body concepts are good for style direction.</figcaption>
+          <figcaption class="image-caption">Lab V4 is the current builder reference: useful layout and strong style match.</figcaption>
         </figure>
         <figure class="image-card contain">
           <div class="asset-image">
-            <img src="assets/images/modular-plague-zombie-sheet-transparent.png" alt="Modular zombie parts sheet used for production testing">
+            <img src="assets/art-style/screen_concepts/battle_screen_rts_spells_concept_04_pc_style_ref.png" alt="RTS battle screen reference">
           </div>
-          <figcaption class="image-caption">Production needs separated parts with consistent anchors and scale.</figcaption>
+          <figcaption class="image-caption">Battle V4 is useful but not final: V5 should simplify terrain and make squads read as formation shapes.</figcaption>
         </figure>
       </div>
       <div class="risk-grid">
         <article class="risk good">
-          <h3>Correct direction</h3>
-          <p>Paper-doll zombie rig: full-canvas transparent PNGs layered in a strict order. Same camera, scale, ground line, and anchor points.</p>
+          <h3>Lab art direction</h3>
+          <p>Side-view paper-doll zombie rig for construction and inspection. It can show exact modular body parts.</p>
         </article>
         <article class="risk">
-          <h3>Main production risk</h3>
-          <p>AI can make cool concepts, but generated parts may not attach cleanly. The risky part is geometry consistency, not visual style.</p>
+          <h3>Battle art direction</h3>
+          <p>High-angle RTS battle sprites simplify the lab design into readable squad-scale signals: body mass, tool, offhand, movement, and overlay.</p>
         </article>
         <article class="risk good">
-          <h3>First rig</h3>
-          <p>1024x1024 art canvas, right-facing side view, body center x=512, ground line y=860, layer order: back arm, back leg, front leg, torso, head, front arm, effects.</p>
+          <h3>Part system</h3>
+          <p>Stats and tags create roles. Shield plus healing staff can become a tank healer; bow plus relic can become ranged support.</p>
         </article>
         <article class="risk">
           <h3>QA rule</h3>
-          <p>A part is not accepted until it composites cleanly with parts from other families. It cannot only work with its original matching set.</p>
+          <p>A reference is not final until it works at PC screen scale, keeps silhouettes readable, and can be reproduced consistently.</p>
         </article>
       </div>
     </section>
@@ -1077,11 +1077,11 @@
       <div class="roadmap">
         <div class="roadmap-row">
           <div class="roadmap-date">Weeks 1-2</div>
-          <div class="roadmap-work"><strong>Playable skeleton</strong> Static lab, assembler mockup, placeholder lane battle, basic win/loss.</div>
+          <div class="roadmap-work"><strong>Playable skeleton</strong> Static lab, assembler mockup, placeholder RTS-style battle, basic win/loss.</div>
         </div>
         <div class="roadmap-row">
           <div class="roadmap-date">Weeks 3-4</div>
-          <div class="roadmap-work"><strong>Data-driven zombies</strong> Parts, stats, effects, assembled design preview, simple save data.</div>
+          <div class="roadmap-work"><strong>Data-driven zombies</strong> Parts, stats, tags, effects, assembled design preview, simple save data.</div>
         </div>
         <div class="roadmap-row">
           <div class="roadmap-date">Weeks 5-6</div>
@@ -1093,7 +1093,7 @@
         </div>
         <div class="roadmap-row">
           <div class="roadmap-date">Weeks 9-10</div>
-          <div class="roadmap-work"><strong>Production assets</strong> Lock modular rig, create first 18 parts, QA mixed body combinations.</div>
+          <div class="roadmap-work"><strong>Production assets</strong> Lock lab rig, define battle rig, create first 18 parts, QA mixed body combinations.</div>
         </div>
         <div class="roadmap-row">
           <div class="roadmap-date">Weeks 11-12</div>
@@ -1110,7 +1110,7 @@
       <div class="risk-grid">
         <article class="risk good">
           <h3>1v1 pitch</h3>
-          <p>Two players bring zombie designs, spawn from opposite sides, and automatic lane combat determines whose corpse-engineering is stronger.</p>
+          <p>Two players bring zombie designs, spawn squads from opposite sides, and automatic RTS-style combat determines whose corpse-engineering is stronger.</p>
         </article>
         <article class="risk good">
           <h3>Best first mode</h3>
@@ -1146,8 +1146,8 @@
           <p>The production plan must survive hundreds of combinations.</p>
         </article>
         <article class="module">
-          <h3>No multi-lane start</h3>
-          <p>One lane keeps AI, UI, and balance manageable.</p>
+          <h3>No large-map start</h3>
+          <p>Use a small controlled battlefield before large maps, multiple lanes, or free-form RTS control.</p>
         </article>
         <article class="module">
           <h3>No PvP start</h3>

@@ -1,6 +1,6 @@
 # Zombie Side Rig V1 Art Guide
 
-This is the drawing standard for all modular zombie parts. Do not start producing many parts until this template works in Unity with at least one walk and attack animation.
+This is the drawing standard for modular zombie parts used in the lab, corpse-builder screen, large unit preview, and inspection UI. Do not treat this as the battle sprite standard. Actual battles use a separate old-RTS high-angle camera.
 
 ## Fixed Canvas
 
@@ -14,6 +14,8 @@ This is the drawing standard for all modular zombie parts. Do not start producin
 - Export each body part on the full `1024 x 1024 px` canvas first
 
 Full-canvas exports are less efficient, but they remove offset problems while the rig is still being proven.
+
+This side-view rig is valuable because the player needs to inspect body construction clearly. The battlefield can use simplified high-angle sprites derived from the zombie's role/family instead of showing every modular part.
 
 ## Slots
 
@@ -90,6 +92,8 @@ Use these coordinates on the `1024 x 1024 px` canvas:
 
 The exact visual outline can vary, but the attachment points must stay stable.
 
+These coordinates are pivot/overlap targets, not visible socket designs. Do not draw circular shoulder holes, black tunnels, or mechanical slots into the torso. Arm sprites cover the shoulder joint areas in Unity, so torso art should use plain shoulder stumps or quiet overlap shapes.
+
 ## Unity Slot Mapping
 
 Recommended Unity hierarchy:
@@ -112,12 +116,12 @@ Unity animation should move these slot transforms. The art should be drawn so ev
 
 ## Angle Rules
 
-The rig is not isometric and not top-down.
+The lab rig is not the battle camera.
 
 Use this angle:
 
 ```text
-Side-scrolling 2.5D game art, right-facing side view with slight three-quarter depth, clear horizontal lane readability, visible top surfaces only subtly.
+Right-facing side-view 2D modular zombie paper-doll art for a corpse-building screen, slight three-quarter depth, full-canvas sprite, no visible sockets, limbs overlap and cover joints.
 ```
 
 For modular zombie parts:
@@ -125,7 +129,7 @@ For modular zombie parts:
 - Head and torso can show slight chest/face depth.
 - Arms and legs must still attach as side-view paper-doll parts.
 - Feet must sit naturally on the ground line.
-- Top surfaces should be subtle. If a part looks like it belongs in an isometric tactics game, reject it.
+- Top surfaces should be subtle. If a part looks like a small old-RTS battle unit instead of a builder-preview body part, reject it for this rig.
 
 ## Limb-Specific Drawing Notes
 
@@ -184,10 +188,11 @@ Before accepting a part:
 - It has no baked shadow.
 - It does not include another body slot by accident.
 - It touches or overlaps its anchor area cleanly.
+- Shoulder joints are covered by limb overlap, not exposed as visible sockets.
 - It still works when combined with parts from another family.
 - Feet reach the ground line when relevant.
 - Shoulder, hip, and neck areas have enough overlap to hide seams.
-- The silhouette reads at small battle size.
+- The silhouette reads in the lab preview and when scaled down for UI inspection.
 
 ## First Production Set
 
@@ -217,6 +222,19 @@ runner_back_leg_01
 ```
 
 Total: `18` production parts.
+
+Before treating a family as production-ready, test one family with separate generations per slot:
+
+```text
+head
+torso
+front_arm
+back_arm
+front_leg
+back_leg
+```
+
+Do not rely only on a full-body sheet. Separate generations expose whether the style, anchors, overlap areas, and front/back limb logic survive the real modular workflow.
 
 ## Important Rule
 

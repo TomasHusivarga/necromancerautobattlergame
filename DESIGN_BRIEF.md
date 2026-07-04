@@ -2,7 +2,7 @@
 
 ## Core Pitch
 
-A 2D necromancer strategy/autobattler where the player runs a corpse-engineering lab, builds custom zombies from modular body parts, then sends those designs into automatic lane battles.
+A 2D necromancer strategy/autobattler where the player runs a corpse-engineering lab, builds custom zombies from modular body parts, then sends those designs into automatic RTS-style squad battles.
 
 The player does not micro-control units during combat. Zombies march forward, meet enemy waves, attack automatically, die, and generate results. The main player skill is in designing bodies before battle: choosing heads, torsos, arms, individual legs, mutations, and passive effects that combine into useful combat roles.
 
@@ -128,17 +128,19 @@ Important rule: the player should be able to read the assembled zombie and under
 
 ## Battle Model
 
-Battles use automatic lane combat:
+Battles use automatic squad combat viewed from an old-RTS high-angle camera:
 
 - Units spawn from the player's side.
 - Enemies spawn from the opposite side or from wave triggers.
-- Units walk toward enemies.
+- Units move across the battlefield toward enemies/objectives.
 - When in range, units stop and attack.
 - Melee units block each other.
 - Ranged or special parts can attack from behind the front line.
 - Battle ends when the enemy base/wave is cleared or the player's force collapses.
 
 The goal is readable combat, not tactical micro. The battle should quickly show whether a body design works.
+
+Visual rule: the lab uses large side-view modular zombie previews, but the battle screen uses small high-angle RTS-style unit sprites so many squads can be visible at once.
 
 ## Battle Flow
 
@@ -348,7 +350,7 @@ The player should keep progress after losing, unless a later roguelite mode is i
 
 ## Later Multiplayer Direction
 
-If early access proves the solo game has strong retention, a later expansion can add 1v1 automatic lane battles.
+If early access proves the solo game has strong retention, a later expansion can add 1v1 automatic RTS-style battles.
 
 The multiplayer pitch:
 
@@ -888,7 +890,7 @@ Mitigations:
 - Build battle with placeholders before final art.
 - Keep effects visible and limited.
 - Use deterministic encounters during early balancing.
-- Delay multi-lane battles, advanced crafting, and procedural rewards.
+- Delay large-map battles, advanced crafting, and procedural rewards.
 
 ## Do Not Build Yet
 
@@ -927,6 +929,8 @@ These are useful as visual direction, not final production standards.
 
 ## Modular Zombie Rig Spec
 
+This rig is for the lab, corpse-builder screen, large unit preview, and inspection UI. It is not the final battle sprite camera.
+
 ### Canvas
 
 Use one fixed canvas size for every assembled zombie and every individual part export.
@@ -934,7 +938,7 @@ Use one fixed canvas size for every assembled zombie and every individual part e
 Recommended art master rig:
 
 - Canvas: `1024x1024`
-- Facing: right-facing side/profile or three-quarter side view
+- Facing: right-facing side/profile or three-quarter side view for the lab builder
 - Ground line: `y=860`
 - Body center line: `x=512`
 - Transparent background
@@ -1013,7 +1017,7 @@ AI generation can be used for concepting and first-pass parts, but production as
 Every generated part must follow this guide:
 
 - Same `1024x1024` transparent canvas.
-- Same camera angle.
+- Same lab-builder camera angle.
 - Same scale.
 - Same lighting direction.
 - Same ground line.
@@ -1022,7 +1026,9 @@ Every generated part must follow this guide:
 - No mismatched perspective.
 - No cropped limbs.
 - No extra heads, weapons, floating gore, text, labels, frames, or background.
-- Silhouette must remain readable at small size.
+- Silhouette must remain readable in the lab preview and part-card UI.
+
+Battle sprites use a different prompt standard: old-RTS high-angle orthographic unit art, small squad-scale readability, simplified full-body sprites, and no requirement to show every modular body part.
 - Attachment areas must be clean enough to overlap without obvious gaps.
 
 Recommended production workflow:
@@ -1151,17 +1157,17 @@ Avoid complex hidden formulas in the first slice. The player should understand w
 
 ## AI Asset Prompt Template
 
-Use a strict prompt like this for production attempts:
+Use a strict prompt like this for lab modular part production attempts:
 
 ```text
-Create one modular 2D game sprite body part for a right-facing side-view zombie paper-doll rig.
+Create one modular 2D game sprite body part for a right-facing side-view zombie paper-doll rig used in the corpse-builder screen.
 
 Slot: [head / torso / front_arm / back_arm / front_leg / back_leg]
 Theme: [plague / brute / runner]
 
 Canvas: 1024x1024 transparent PNG.
-Camera: consistent right-facing side view, slight three-quarter depth only.
-Style: dark fantasy hand-painted 2D game sprite, readable silhouette, detailed but clean.
+Camera: consistent right-facing side view for lab preview, slight three-quarter depth only.
+Style: graphic hand-drawn gothic 2D game sprite, readable silhouette, large shadow blocks, restrained detail.
 Lighting: top-left soft light.
 Scale: must match a humanoid zombie whose feet stand on y=860 and body center is x=512.
 Attachment points must match the zombie_side_v1 rig.
@@ -1169,6 +1175,21 @@ Attachment points must match the zombie_side_v1 rig.
 Do not include background, floor, shadow, labels, text, frame, full body, extra limbs, extra heads, weapons unless they are part of this slot, or cropped edges.
 
 The part must fit with other modular zombie parts and must not depend on matching parts from the same set.
+```
+
+Use a different prompt for battlefield zombies:
+
+```text
+Create one old-RTS high-angle orthographic zombie battle unit sprite for a dark fantasy autobattler.
+
+Theme: [plague / brute / runner]
+Role: [tank / fast attacker / ranged spitter / support / swarm]
+
+Camera: high-angle orthographic battlefield view, visible head/shoulders/back and ground contact, small squad-scale readability.
+Style: graphic hand-drawn gothic 2D game art, bold readable silhouette, large shadow blocks, restrained detail.
+Background: transparent PNG or flat chroma-key for removal.
+
+Do not make a side-view paper-doll part, portrait, fighting-game profile, visible socket rig, text, label, frame, or background scene.
 ```
 
 For better consistency, generate against a visible template sheet or manually align after generation.
@@ -1182,7 +1203,7 @@ Before accepting a part:
 - Check shoulder overlap.
 - Check hip alignment.
 - Check feet on ground line.
-- Check silhouette at battle size.
+- Check silhouette at lab preview and part-card size.
 - Check that the part still reads when tinted, damaged, or partially covered by effects.
 
 A part is not production-ready if it only looks good in the original full matched zombie.
@@ -1192,11 +1213,12 @@ A part is not production-ready if it only looks good in the original full matche
 1. Build a static zombie assembler that layers six PNG parts.
 2. Add metadata-driven part selection.
 3. Add simple stat aggregation.
-4. Build one lane battle with placeholder rectangles or rough sprites.
-5. Connect assembled zombie stats to battle behavior.
+4. Build one old-RTS high-angle battle prototype with placeholder squads.
+5. Connect assembled zombie stats to simplified battle unit behavior.
 6. Add rewards and unlocks.
-7. Replace placeholder parts with first production-quality modular set.
-8. Add polish only after the loop is playable.
+7. Replace lab placeholders with the first production-quality modular set.
+8. Replace battle placeholders with first RTS-scale unit sprites.
+9. Add polish only after the loop is playable.
 
 ## Success Criteria
 
