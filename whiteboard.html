@@ -433,6 +433,10 @@
       padding: 18px;
     }
 
+    .note.spaced {
+      margin-top: 14px;
+    }
+
     .zombie-preview {
       min-height: 420px;
       padding: 20px;
@@ -624,6 +628,10 @@
       margin-bottom: 14px;
     }
 
+    .visual-guide.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .asset-image {
       min-height: 320px;
       overflow: hidden;
@@ -674,6 +682,10 @@
       .hero,
       .lab-layout,
       .visual-guide {
+        grid-template-columns: 1fr;
+      }
+
+      .visual-guide.three {
         grid-template-columns: 1fr;
       }
 
@@ -740,6 +752,7 @@
         <a href="#modules">Modules</a>
         <a href="#lab">Lab</a>
         <a href="#battle">Battle</a>
+        <a href="#roles">Roles</a>
         <a href="#assets">Assets</a>
         <a href="#next-work">Next</a>
         <a href="#multiplayer">1v1 Later</a>
@@ -1024,10 +1037,14 @@
           </ul>
         </aside>
       </div>
-      <div class="visual-guide">
+      <div class="visual-guide three">
         <figure class="image-card contain">
           <img src="assets/art-style/screen_concepts/lab_builder_inventory_concept_04_pc_style_ref.png" alt="Current lab builder screen reference">
           <figcaption class="image-caption">Current lab reference: PC 16:9 builder with inventory, construction board, stat panel, and action bar.</figcaption>
+        </figure>
+        <figure class="image-card contain">
+          <img src="assets/images/lab/lab_zombie_x_pose_iron_frame_reference_01.png" alt="Lab zombie X-pose iron frame reference">
+          <figcaption class="image-caption">New lab example: front inspection pose for comparing parts, with a dark iron frame underneath to connect mismatched modular limbs.</figcaption>
         </figure>
         <figure class="image-card contain">
           <img src="assets/art-style/references/approved_graphic_big_shape_style_reference.png" alt="Approved graphic gothic style reference">
@@ -1132,6 +1149,59 @@
           <h3>Iron frame idea</h3>
           <p>Lab modular zombies can use a dark necromantic iron frame under body parts to hide seams and make odd limb combinations feel intentional.</p>
         </article>
+      </div>
+    </section>
+
+    <section class="section" id="roles">
+      <div class="section-title">
+        <h2>Four MVP Combat Roles</h2>
+        <p>The first playable version should prove four clear battlefield jobs. These are not fixed classes; they are examples created from modular parts.</p>
+      </div>
+      <div class="phases">
+        <article class="phase">
+          <span class="tag">Melee</span>
+          <h3>Frontline Claw</h3>
+          <p><strong>Example parts:</strong> brute torso, claw arm, shield or hook offhand, heavy legs.</p>
+          <ul>
+            <li>Walks into the front of the blob and holds contact.</li>
+            <li>Good health, armor, stability, and short-range damage.</li>
+            <li>Visual signal: big torso, heavy feet, obvious claw or weapon silhouette.</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <span class="tag">Ranged</span>
+          <h3>Bone Archer</h3>
+          <p><strong>Example parts:</strong> dexterity head, light torso, bow arm, relic offhand, runner legs.</p>
+          <ul>
+            <li>Stays behind melee bodies and fires into the enemy blob.</li>
+            <li>Good range, attack speed, and focus, but weak if reached.</li>
+            <li>Visual signal: clear bow shape, narrow body, faster lighter stance.</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <span class="tag">Caster AoE</span>
+          <h3>Plague Mage</h3>
+          <p><strong>Example parts:</strong> scholar head, caster torso, plague staff arm, relic offhand, slow stable legs.</p>
+          <ul>
+            <li>Casts delayed area damage into dense fights.</li>
+            <li>Good intelligence, focus, spell power, and cooldown recovery.</li>
+            <li>Visual signal: staff glow, green AoE accent, hunched caster silhouette.</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <span class="tag">Healer</span>
+          <h3>Grave Medic</h3>
+          <p><strong>Example parts:</strong> focus head, scholar torso, healing staff arm, relic or lantern offhand, careful legs.</p>
+          <ul>
+            <li>Follows the friendly blob and keeps frontline units alive.</li>
+            <li>Good healing power, focus, support tags, and low direct damage.</li>
+            <li>Visual signal: staff or lantern, pale green pulse, support aura marker.</li>
+          </ul>
+        </article>
+      </div>
+      <div class="note spaced">
+        <h3>Hybrid rule</h3>
+        <p>The player can still combine roles. Shield plus healing staff becomes a tank healer. Bow plus relic becomes ranged support. Caster torso plus claw arm becomes a risky battle mage. The role cards above are teaching examples, not hard class locks.</p>
       </div>
     </section>
 
