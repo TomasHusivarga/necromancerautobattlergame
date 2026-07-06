@@ -21,7 +21,8 @@ This file records locked or current project decisions. Keep it short. Detailed r
 | Area | Current Best | Status |
 |---|---|---|
 | Lab screen | `assets/art-style/screen_concepts/lab_builder_inventory_concept_04_pc_style_ref.png` | Current reference candidate |
-| Battle screen | `assets/art-style/screen_concepts/battle_screen_rts_spells_concept_04_pc_style_ref.png` | Needs V5 simplification |
+| Battle prototype | `E:\UnityProject\TD Game\Assets\Scenes\BattlePhaseTest1.unity` | Current playable runtime prototype |
+| Battle screen concept | `assets/art-style/screen_concepts/battle_screen_rts_spells_concept_04_pc_style_ref.png` | Reference only |
 | Style reference | `assets/art-style/references/approved_graphic_big_shape_style_reference.png` | Approved style target |
 
 ## Production Rules
@@ -29,6 +30,8 @@ This file records locked or current project decisions. Keep it short. Detailed r
 - The lab zombie rig and the battle unit sprites are separate visual systems.
 - Lab art can show detailed modular body parts.
 - Battle art should simplify the built design into readable squad-scale silhouettes.
-- Battle V4 is not final. The next battle concept should reduce individual figures, terrain marks, and small detail.
+- `BattlePhaseTest1` is now the primary battle reference because it is a working runtime prototype.
+- Battle V4 remains useful visual history, but new work should improve the playable prototype before making more screen concepts.
+- Tom/Codex-created Unity scripts belong under `E:\UnityProject\TD Game\Assets\_Scripts\Tom_Code`.
+- Partner/root scripts outside `Tom_Code` should not be edited unless explicitly requested or required for compilation.
 - Do not commit, push, upload, or publish to GitHub unless explicitly asked.
-

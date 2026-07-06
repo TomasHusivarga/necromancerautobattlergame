@@ -734,11 +734,14 @@
       </div>
       <nav class="nav" aria-label="Whiteboard sections">
         <a href="#loop">Loop</a>
+        <a href="#status">Status</a>
+        <a href="#ownership">Code</a>
         <a href="#phases">Steps</a>
         <a href="#modules">Modules</a>
         <a href="#lab">Lab</a>
         <a href="#battle">Battle</a>
         <a href="#assets">Assets</a>
+        <a href="#next-work">Next</a>
         <a href="#multiplayer">1v1 Later</a>
       </nav>
     </header>
@@ -760,8 +763,8 @@
             <span>high-angle automatic squad battles</span>
           </div>
           <div class="stat">
-            <strong>18</strong>
-            <span>first production body parts</span>
+            <strong>70</strong>
+            <span>runtime units in BattlePhaseTest1</span>
           </div>
           <div class="stat">
             <strong>729</strong>
@@ -781,6 +784,64 @@
           <figcaption class="image-caption">Approved style target: bold black outlines, flat shadow blocks, limited texture, and readable silhouettes.</figcaption>
         </figure>
       </aside>
+    </section>
+
+    <section class="section" id="status">
+      <div class="section-title">
+        <h2>Current Unity Status</h2>
+        <p>This is the current practical state for partner review. The battle prototype is now runtime gameplay, not only concept art.</p>
+      </div>
+      <div class="modules">
+        <article class="module">
+          <h3>Playable prototype scene</h3>
+          <p><strong>BattlePhaseTest1</strong> is the current Unity battle prototype. It auto-starts a one-lane mass fight using real spawned units.</p>
+        </article>
+        <article class="module">
+          <h3>Runtime unit count</h3>
+          <p>The scene spawns 70 individual GameObjects: 34 player zombies and 36 enemies. They are not painted crowd/blob images.</p>
+        </article>
+        <article class="module">
+          <h3>Working combat behavior</h3>
+          <p>Units move as loose blobs, separate from allies, find targets, attack on cooldown, take damage, die, and use Y-sorting.</p>
+        </article>
+        <article class="module">
+          <h3>Still rough</h3>
+          <p>Sprites are placeholders, battle logic is one broad lane, background art is first-pass generated, and there are no health bars yet.</p>
+        </article>
+        <article class="module">
+          <h3>Immediate verification</h3>
+          <p>Open Unity, load <strong>BattlePhaseTest1</strong>, press Play, and confirm the console stays clean after the <strong>Tom_Code</strong> folder move.</p>
+        </article>
+        <article class="module">
+          <h3>Git warning</h3>
+          <p>Before pushing Unity work, fix the Unity <strong>.meta</strong> tracking rules. Unity assets must keep their meta files in Git.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="ownership">
+      <div class="section-title">
+        <h2>Code Ownership Rule</h2>
+        <p>This keeps partner-authored code separate from Tom/Codex-created systems.</p>
+      </div>
+      <div class="risk-grid">
+        <article class="risk good">
+          <h3>Tom / Codex code</h3>
+          <p>All new AI-assisted code goes under <strong>E:\UnityProject\TD Game\Assets\_Scripts\Tom_Code</strong>.</p>
+        </article>
+        <article class="risk good">
+          <h3>Current AI modules</h3>
+          <p><strong>Tom_Code/BattlePhase/</strong> contains the runtime battle prototype. <strong>Tom_Code/Rigs/Zombies/</strong> contains the modular zombie rig helper.</p>
+        </article>
+        <article class="risk">
+          <h3>Partner code</h3>
+          <p>Root scripts outside <strong>Tom_Code</strong> should be treated as partner-owned unless the team explicitly agrees otherwise.</p>
+        </article>
+        <article class="risk">
+          <h3>Edit rule</h3>
+          <p>Do not edit partner scripts unless required for compilation or explicitly requested. New Codex systems should be clearly sorted under <strong>Tom_Code</strong>.</p>
+        </article>
+      </div>
     </section>
 
     <section class="section" id="loop">
@@ -835,16 +896,16 @@
       <div class="phases">
         <article class="phase">
           <span class="tag">Phase 1</span>
-          <h3>Prototype The Loop</h3>
+          <h3>Runtime Prototype</h3>
           <div class="phase-image">
             <img src="assets/images/steps/step-01-choose-corpse-parts.png" alt="Rough concept for selecting corpse parts in the lab">
           </div>
           <ul>
-            <li>Static lab screen.</li>
-            <li>Simple zombie assembler.</li>
-            <li>Placeholder body parts.</li>
-            <li>High-angle battle prototype with placeholder squads.</li>
-            <li>Win/loss and restart.</li>
+            <li>BattlePhaseTest1 runtime battle is working.</li>
+            <li>70 placeholder units spawn as individual GameObjects.</li>
+            <li>Units move, target, attack, die, and sort by Y.</li>
+            <li>Next: add health bars and clearer damage feedback.</li>
+            <li>Lab screen and assembler still need a focused implementation pass.</li>
           </ul>
         </article>
         <article class="phase">
@@ -877,7 +938,7 @@
         </article>
         <article class="phase">
           <span class="tag">Phase 4</span>
-          <h3>Replace Rough Art</h3>
+          <h3>Production Art Pass</h3>
           <div class="phase-image">
             <img src="assets/images/steps/step-05-improve-design.png" alt="Upgrade mockup for improving the first playable slice">
           </div>
@@ -885,8 +946,9 @@
             <li>Lock rig template.</li>
             <li>Create 18 aligned parts.</li>
             <li>Composite QA sheet.</li>
+            <li>Use stick/pivot guides for AI part generation.</li>
+            <li>Use dark iron frame under modular lab parts to hide seams.</li>
             <li>Effects and hit feedback.</li>
-            <li>Polish first playable slice.</li>
           </ul>
         </article>
       </div>
@@ -977,12 +1039,12 @@
     <section class="section" id="battle">
       <div class="section-title">
         <h2>Battle Whiteboard</h2>
-        <p>High-angle RTS-style automatic combat. Keep squads readable and avoid complex pathfinding until the core combat is fun.</p>
+        <p>High-angle RTS-style automatic combat. Current MVP is one broad runtime lane with individual units forming readable battle blobs.</p>
       </div>
       <div class="battle-board">
         <div class="lane">
-          <h3>Automatic squad fight</h3>
-          <p>Zombies and enemies spawn as readable groups, move toward objectives, cast abilities, and fight when in range.</p>
+          <h3>Runtime mass fight</h3>
+          <p>Units are real GameObjects. They spawn from both sides, move into loose blobs, target enemies, attack, die, and resolve automatically.</p>
           <div class="lane-track"></div>
           <div class="unit z1">Z</div>
           <div class="unit z2">Z</div>
@@ -1046,7 +1108,7 @@
           <div class="asset-image">
             <img src="assets/art-style/screen_concepts/battle_screen_rts_spells_concept_04_pc_style_ref.png" alt="RTS battle screen reference">
           </div>
-          <figcaption class="image-caption">Battle V4 is useful but not final: V5 should simplify terrain and make squads read as formation shapes.</figcaption>
+          <figcaption class="image-caption">Battle V4 remains a visual reference only. The current priority is the working BattlePhaseTest1 runtime prototype.</figcaption>
         </figure>
       </div>
       <div class="risk-grid">
@@ -1056,15 +1118,19 @@
         </article>
         <article class="risk">
           <h3>Battle art direction</h3>
-          <p>High-angle RTS battle sprites simplify the lab design into readable squad-scale signals: body mass, tool, offhand, movement, and overlay.</p>
+          <p>Battle art now has generated layered battlefield assets and four placeholder moving unit sprites. These are production-prototype assets, not final art.</p>
         </article>
         <article class="risk good">
           <h3>Part system</h3>
           <p>Stats and tags create roles. Shield plus healing staff can become a tank healer; bow plus relic can become ranged support.</p>
         </article>
         <article class="risk">
-          <h3>QA rule</h3>
-          <p>A reference is not final until it works at PC screen scale, keeps silhouettes readable, and can be reproduced consistently.</p>
+          <h3>AI art guide rule</h3>
+          <p>Future AI assets should use hand-drawn stick/pivot guides for pose, proportion, part placement, and camera angle.</p>
+        </article>
+        <article class="risk good">
+          <h3>Iron frame idea</h3>
+          <p>Lab modular zombies can use a dark necromantic iron frame under body parts to hide seams and make odd limb combinations feel intentional.</p>
         </article>
       </div>
     </section>
@@ -1076,29 +1142,62 @@
       </div>
       <div class="roadmap">
         <div class="roadmap-row">
-          <div class="roadmap-date">Weeks 1-2</div>
-          <div class="roadmap-work"><strong>Playable skeleton</strong> Static lab, assembler mockup, placeholder RTS-style battle, basic win/loss.</div>
+          <div class="roadmap-date">Done now</div>
+          <div class="roadmap-work"><strong>BattlePhaseTest1 runtime prototype</strong> One broad lane, layered generated battlefield, 70 spawned units, movement, targeting, attacks, death, and Y-sorting.</div>
         </div>
         <div class="roadmap-row">
-          <div class="roadmap-date">Weeks 3-4</div>
-          <div class="roadmap-work"><strong>Data-driven zombies</strong> Parts, stats, tags, effects, assembled design preview, simple save data.</div>
+          <div class="roadmap-date">Next</div>
+          <div class="roadmap-work"><strong>Battle clarity</strong> Verify Unity console after Tom_Code move, add health bars or damage feedback, and tune unit spacing/readability.</div>
         </div>
         <div class="roadmap-row">
-          <div class="roadmap-date">Weeks 5-6</div>
-          <div class="roadmap-work"><strong>Combat clarity</strong> Enemy waves, statuses, health bars, result feedback, three encounters.</div>
+          <div class="roadmap-date">After that</div>
+          <div class="roadmap-work"><strong>Data-driven stats</strong> Connect battle unit behavior to part/stat/tag definitions instead of hardcoded placeholder waves.</div>
         </div>
         <div class="roadmap-row">
-          <div class="roadmap-date">Weeks 7-8</div>
-          <div class="roadmap-work"><strong>Progression</strong> Rewards, research, upgrades, mutation slot, unlock pacing.</div>
+          <div class="roadmap-date">Then</div>
+          <div class="roadmap-work"><strong>Lab builder</strong> Plan and implement lab UI, part inventory, zombie design data, and large side-view preview.</div>
         </div>
         <div class="roadmap-row">
-          <div class="roadmap-date">Weeks 9-10</div>
-          <div class="roadmap-work"><strong>Production assets</strong> Lock lab rig, define battle rig, create first 18 parts, QA mixed body combinations.</div>
+          <div class="roadmap-date">Art pass</div>
+          <div class="roadmap-work"><strong>Production assets</strong> Use pose guides, iron frame rules, and the approved style reference to create the first reliable modular lab parts.</div>
         </div>
         <div class="roadmap-row">
-          <div class="roadmap-date">Weeks 11-12</div>
+          <div class="roadmap-date">Vertical slice</div>
           <div class="roadmap-work"><strong>Vertical slice polish</strong> UI pass, audio, visual effects, balancing, bug fixes, partner playtest build.</div>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="next-work">
+      <div class="section-title">
+        <h2>What To Work On Next</h2>
+        <p>Use this as the short partner handoff list.</p>
+      </div>
+      <div class="modules">
+        <article class="module">
+          <h3>Code</h3>
+          <p>Avoid <strong>Tom_Code</strong> unless coordinating with Tom. Partner-owned scripts can stay outside that folder.</p>
+        </article>
+        <article class="module">
+          <h3>Unity scene</h3>
+          <p>Open <strong>BattlePhaseTest1</strong>, verify camera, prefab references, play-mode unit spawn, and a clean console.</p>
+        </article>
+        <article class="module">
+          <h3>Design</h3>
+          <p>Review <strong>PART_STAT_TAG_SYSTEM.md</strong> and help define the first MVP heads, torsos, arms, legs, and mutations.</p>
+        </article>
+        <article class="module">
+          <h3>Art</h3>
+          <p>Follow the approved graphic style, camera rules, stick/pivot guides, and iron-frame modular lab rig idea.</p>
+        </article>
+        <article class="module">
+          <h3>Git</h3>
+          <p>Fix Unity <strong>.meta</strong> tracking before pushing Unity assets. Do not rely on Unity files without their meta files.</p>
+        </article>
+        <article class="module">
+          <h3>Gameplay</h3>
+          <p>Next visible improvement should be health bars, hit feedback, or damage numbers so battle results become readable.</p>
+        </article>
       </div>
     </section>
 
